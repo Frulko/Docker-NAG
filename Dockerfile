@@ -17,17 +17,24 @@ RUN \
         cpanminus \
         libexpat1-dev \
         libssl-dev \
-        mysql-client \
-        libmysqlclient-dev \
+        # mysql-client \
+        # libmysqlclient-dev \
+        imagemagick-6.q16 \
+        imagemagick \
         libapreq2-dev \
+        perlmagick \
         zip && \
-    cpanm DBD::mysql && \
+    cpanm install JSON && \
+    cpanm install JSON::Parse && \
+    # cpanm DBD::mysql && \
     a2enmod cgid && \
     a2enmod rewrite && \
     a2dissite 000-default && \
     apt-get update -y && \
     apt-get upgrade -y && \
     apt-get -y clean
+
+# RUN ["apt-cache", "policy", "imagemagick"]
 
 COPY localhost.conf /etc/apache2/sites-enabled/localhost.conf
 
